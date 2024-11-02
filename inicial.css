@@ -1,0 +1,190 @@
+/*Redefine as configurações de margin e padding*/
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+/*Importa a fonte krona one*/
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
+/*Define a cor do body*/
+body {
+    background-color: #FD9438;
+}
+
+/*Classe para o cabeçalho*/
+.cabecalho {
+    display: grid;
+    grid-template-columns: 7% 85% 8%;
+    background-color: #ffffff;
+    align-items: center;
+    height: 120px;
+}
+
+/*Classe para o titulo*/
+.titulo {
+    justify-self: end;
+    padding-right: 2%;
+}
+
+/*Classe para o meio da página*/
+.meio {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+/*Classe para a div de opção de cadastros*/
+.cadastros {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    gap: 20px;
+    padding: 80px; 
+    background-color: #ffffff;
+    height: 100%;
+    width: 60%;
+    align-items: center;
+    border-radius: 40px;
+}
+
+/*Estilização dos labels*/
+label {
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FF7700;
+    font-size: 30px;
+}
+
+/*Classe para o h1*/
+.h1 {
+    padding-top: 2%;
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 35px;
+    text-align: center;
+    padding-bottom: 3%;
+}
+
+/*Classe para o input*/
+input {
+    background-color: #FF9B44;
+    border-style: none;
+    height: 70px;
+    width: 700px;
+    margin-bottom: 7%;
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 2%;
+}
+
+/*Classe para o botão fechar*/
+.fechar {
+    margin-left: 40px;
+}
+
+/*Estilização dos botões*/
+button {
+    height: 120px;
+    width: 325px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #FF7700;
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+/*Classe para a fonte*/
+.fonte {
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 25px;
+}
+
+/*Classe para a imagem da logo*/
+.logo {
+    height: 60px;
+    width: 200px;
+    margin-left: 20%;
+}
+
+/*Classe para o footer*/
+.footer {
+    display: flex;
+    background-color: #ffffff;
+    align-items: center;
+    height: 80px;
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    justify-content: center;
+    padding-top: 1%;
+}
+
+/*Classe para o h1 do footer*/
+.h1footer {
+    font-size: 25px;
+    align-self: center;
+}
+
+/*Classe para a div botoes1*/
+.botoes1 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-top: 3%;
+}
+
+/*Classe para a div botoes2*/
+.botoes2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-top: 10%;
+}
+
+/*Classes para espaçamento entre os botões */
+.clientes {
+    margin-right: 80px;
+}
+
+.funcionarios {
+    margin-left: 80px;
+}
+
+.veiculos {
+    margin-right: 80px;
+}
+
+.alocacao {
+    margin-left: 80px;
+}
+
+/*Classes para estilização do menu*/
+.dropdown-item {
+    background-color: #FF9B44;
+    border-color: #FF9B44;
+    font-family: "Krona One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.dropdown-menu {
+    background-color: #FF9B44;
+}
+
+.img-menu {
+    width: 80%;
+    height: 70%;
+}
