@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> <!-- Importando o bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> <!-- Importando o script do bootstrap -->
+    <link rel="stylesheet" href="\views\public\styles\funcionarios.css"> <!-- importando o CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+    <title>Funcionários</title> <!-- Titulo da página -->
+</head>
+<body>
+    <script src="funcionarios.js"></script> <!-- Importando o JS -->
+
+    <header class="cabecalho"> <!-- Header -->
+        <div> <!-- Div para a logo -->
+            <img src="\assets\imagens\logo.png" class="logo">
+        </div>
+
+        <div></div> <!-- Div vazia pois não há nada nesta parte -->
+
+        <nav> <!-- Nav do menu -->
+            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="\assets\imagens\menu.png" class="img-menu"> <!-- Imagem do menu com boostrap -->
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"> <!-- menu com bootstrap que redireciona para as outras páginas -->
+                <li><a class="dropdown-item" href="inicial.html">Inicial</a></li>
+                <li><a class="dropdown-item" href="clientes.html">Clientes</a></li>
+                <li><a class="dropdown-item" href="funcionarios.html">Funcionários</a></li>
+                <li><a class="dropdown-item" href="veiculos.html">Veículos</a></li>
+                <li><a class="dropdown-item" href="os.html">Alocações</a></li>
+              </ul>
+        </nav>
+    </header>
+
+    <div class="cadastro"> <!-- Div para a parte de cadastro -->
+        <h1 class="titulo">Cadastro de Funcionários</h1> <!-- Titulo dentro da div -->
+
+        <form id="formulario"> <!-- Formulário de cadastro -->
+        <div class="form"> <!-- Div para o form -->
+        <div class="coluna1"> <!-- Div para a coluna 1 do formulário-->
+            <!-- Label e input de matrícula -->
+            <p>
+                <label class="nomeLabel">Matrícula:</label><br>
+                <input type="text" id="matricula"><br>
+            </p>
+            
+            <!-- Label e select de departamento -->
+            <p>
+                <label class="departamentoLabel">Departamento:</label><br>
+                <select class="selectstyle" id="departamento">                    
+                        <option value="dep1">Dep1</option>
+                        <option value="dep2">Dep2</option>
+                        <option value="dep3">Dep3</option>
+                </select>
+            </p>
+
+            <!-- Label e input da data de admissão -->
+            <p>
+                <label class="endLabel">Data de admissão:</label><br>
+                <input type="date" id="data"><br>
+            </p>
+
+            <!-- Label e inputs type radio de status -->
+            <p>
+                <label class="statusLabel">Status:</label><br>
+                <div class="select">
+                     <div class="select1">
+                        <div class="inputRadio">
+                            <h1 class="h1">Ativo: </h1><input type="radio" name="status" class="selecao"><br>
+                        </div>
+                        <div class="inputRadio"> 
+                            <h1 class="h1">Desativado: </h1><input type="radio" name="status" class="selecao">
+                        </div>
+                    </div>
+                </div>
+            </p>
+        </div>
+
+        <!-- Div para a coluna 2 do formulário -->
+        <div class="coluna2">
+            <!-- Label e input de nome completo -->
+            <p>
+                <label class="nomeLabel">Nome completo:</label><br>
+                <input type="tel" id="nome"><br>
+            </p>
+
+            <!-- Label e input de salário -->
+            <p>
+                <label class="salarioLabel">Salário:</label><br>
+                <input type="text" id="salario"><br>
+            </p>
+
+            <!-- Label e select de qtd de filhos -->
+            <p>
+                <label class="filhoLabel">Quantidade de Filhos:</label><br>
+                <select class="selectstyle" id="filhos">                    
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5 ou mais</option>
+                </select>
+            </p>
+
+            <!-- Label e select de sexo -->
+            <p>
+                <label class="sexoLabel">Sexo:</label><br>
+                <select class="selectstyle" id="sexo">                    
+                        <option value="feminino">Feminino</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="outro">Outro</option>
+                </select>
+            </p>
+        </div>
+    </div>
+    </form>
+        <div class="botoes"> <!-- Div para os botões -->
+            <div class="botoes1"> <!-- Div para dividir os botões parte 1 -->
+                <button id="novo">Novo</button>
+                <button id="salvar">Salvar</button>
+                <button id="editar">Editar</button>
+            </div>
+            <div class="botoes2"> <!-- Div para dividir os botões parte 2 -->
+                <button id="cancelar">Cancelar</button>
+                <button id="excluir">Excluir</button>
+                <button id="proximo">Próximo</button>
+            </div>
+            <div class="botoes3"> <!-- Div para dividir os botões parte 3 -->
+                <button id="anterior">Anterior</button>
+                <button id="primeiro">Primeiro</button>
+                <button id="ultimo">Último</button>
+            </div>
+            <div class="buscar"> <!-- Div para o botão de busca -->
+                <button class="botaobuscar" onclick="buscar()">Buscar</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer"> <!-- Footer -->
+        <h1 class="h1footer">Desenvolvido por Vinícius Viana e Carol Rocha do 2° Desenvolvimento de Sistemas</h1>
+    </footer>
+</body>
+</html>

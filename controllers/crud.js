@@ -1,5 +1,5 @@
 // importa o response da biblioteca express, possibilitando manipular reposta HHTP 
-const res = require("express/lib/respone"); 
+const res = require("express/lib/response"); 
 
 // criação do objeto controller vazio, que armazenará os métodos CRUD e att os registros na tabela 
 const controller = {};
@@ -24,6 +24,7 @@ controller.list = (req, res) => {
 };
 // método  para salvar 
 controller.save = (req, res) => {
+    const data = req.body;
     //atribui o req.body (dado enviados no corpo da requiição) à váriavel data
     req.getConnection((err, connn) => {
         // adicionar registro na tabela || utiliza os dados do corpo da requisção (data)

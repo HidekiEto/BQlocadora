@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "express": "^4.21.1",
+    "express-myconnection": "^1.0.4",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.7",
+    "sequelize": "^6.37.5"
+  },
+  "name": "bqlocadora",
+  "version": "1.0.0",
+  "description": "Projeto de integrar um banco de dados na web",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HidekiEto/BQlocadora.git"
+  },
+  "keywords": [
+    "banco",
+    "de",
+    "dados",
+    "pagina",
+    "web"
+  ],
+  "author": "Caroline, Vinicius, Vitor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HidekiEto/BQlocadora/issues"
+  },
+  "homepage": "https://github.com/HidekiEto/BQlocadora#readme"
+}
