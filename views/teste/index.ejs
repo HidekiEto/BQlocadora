@@ -1,0 +1,16 @@
+<tbody> <!-- serve para criar uma tabela em HTML -->
+<% if (data) { %> <!-- verifica se há dados na váriavel data -->
+    <% for (var i = 0; i < data.length; i++) { %>
+        <tr>
+            <td><%= (i + 1) %></td>
+            <td><%= data[i].nome %></td>
+                <td><%= data[i].endereco %></td>
+            <td><%= data[i].telefone %></td>
+            <td>
+                <a href="/delete/<%= data[i].id %>" class="btn btn-danger">Excluir</a>
+                <a href="/update/<%= data[i].id %>" class="btn btn-info">Atualizar</a>
+            </td>
+        </tr>
+    <% } %>
+<% } %>
+</tbody>
