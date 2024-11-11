@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-myconnection": "^1.0.4",
     "morgan": "^1.10.0",
@@ -11,13 +13,13 @@
   "version": "1.0.0",
   "description": "Projeto de integrar um banco de dados na web",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HidekiEto/BQlocadora.git"
+    "url": "git+https://githusb.com/HidekiEto/BQlocadora.git"
   },
   "keywords": [
     "banco",
