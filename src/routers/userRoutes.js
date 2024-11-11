@@ -23,8 +23,8 @@ router.get('/register', (req, res) => {
     res.render('register'); // Renderiza a página register.ejs
 });
 
-router.get('/client', (req, res) => {
-    res.render('client');
+router.get('/clientes', (req, res) => {
+    res.render('clientes');
 });
 
 module.exports = router;

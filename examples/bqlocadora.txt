@@ -1,0 +1,21 @@
+--
+-- Extraindo dados da tabela `clientes`
+--
+
+--INSERT INTO `clientes` (`clienteCPF`, `clienteNome`, `clienteEnde`, `clienteTel`, `clienteCidade`, `clienteDataNasc`, `clienteCNH`, `clienteCNHCat`) VALUES
+--(111222333, 'Pedro Santos', 'Rua da Praia, 789', '(21) 98765-1234', 'Rio de Janeiro', '1978-11-30', 2147483647, 'AB'),
+--(123456789, 'João Silva', 'Rua das Flores, 123', '(11) 98765-4321', 'São Paulo', '1985-04-12', 2147483647, 'B'),
+--(222333444, 'Laura Mendes', 'Avenida Brasil, 303', '(41) 91234-5678', 'Curitiba', '1988-12-10', 2147483647, 'B'),
+--(333444555, 'Gustavo Rocha', 'Avenida Sete, 606', '(11) 93456-7890', 'São Paulo', '1980-01-20', 2147483647, 'C'),
+--(444555666, 'Ana Costa', 'Rua dos Jacarandás, 101', '(31) 92345-6789', 'Belo Horizonte', '1982-05-16', 2147483647, 'B'),
+--(555666777, 'Lucas Almeida', 'Rua das Palmeiras, 404', '(21) 99876-5432', 'Rio de Janeiro', '1993-03-05', 2147483647, 'A'),
+--(666777888, 'Juliana Campos', 'Rua dos Girassóis, 707', '(31) 91567-8901', 'Belo Horizonte', '1991-06-12', 2147483647, 'B'),
+--(777888999, 'Carlos Pereira', 'Rua das Acácias, 202', '(61) 98765-4321', 'Brasília', '1995-07-25', 2147483647, 'C'),
+--(888999000, 'Fernanda Lima', 'Rua das Orquídias, 505', '(71) 98765-6789', 'Salvador', '1987-09-17', 2147483647, 'AB'),
+--(987654321, 'Maria Oliveira', 'Avenida Paulista, 456', '(11) 91234-5678', 'São Paulo', '1990-08-22', 2147483647, 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `combustivel`
+--

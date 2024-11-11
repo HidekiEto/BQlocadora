@@ -9,9 +9,9 @@ controller.register = (req, res) => {
         if (err) return res.status(500).json({ error: "Erro de conexão com o banco de dados" });
 
         // insere novo usuário
-        const newUser = { usuarioLogin, usuarioSenha };
+        const novoUsuario = { usuarioLogin, usuarioSenha };
         
-        conn.query('INSERT INTO usuarios SET ?', newUser, (err, result) => {
+        conn.query('INSERT INTO usuarios SET ?', novoUsuario, (err, result) => {
             if (err) return res.status(500).json({ error: "Erro ao registrar usuário" });
 
            // res.status(201).json({ message: "Usuário registrado com sucesso" });
@@ -35,7 +35,7 @@ controller.login = (req, res) => {
                 return res.status(401).json({ error: "Credenciais incorretas" });
             }
 
-            res.redirect('/client');
+            res.redirect('/clientes');
            // res.status(200).json({ message: "Login realizado com sucesso" });
         });
     });

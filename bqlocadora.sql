@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Estrutura da tabela `categoria`
 --
-
 create database bqlocadora;
 
 use bqlocadora;
@@ -163,7 +162,18 @@ INSERT INTO `funcionarios` (`funcMatricula`, `funcNome`, `funcDepto`, `funcSalar
 (1016, 'Wendell Navarro Perez', 3, '1212.00', '2004-04-15', 2, 'M', 1),
 (1017, 'Rodolfo Rodrigues', 1, '8500.00', '2022-09-10', 2, 'M', 1);
 
-
+--
+-- Acionadores `funcionarios`
+--
+DELIMITER $$
+CREATE TRIGGER `tr_add_usuario` AFTER INSERT ON `funcionarios` FOR EACH ROW BEGIN
+    DECLARE usuarioSenha VARCHAR(8);
+    SET usuarioSenha = DATE_FORMAT(NEW.funcAdmissao, '%y%m%d');
+    INSERT INTO usuarios (usuarioLogin, usuarioSenha, usuarioFuncMat, usuarioStatus)
+    VALUES (NEW.funcMatricula, usuarioSenha, NEW.funcMatricula, 1);
+    END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -203,7 +213,39 @@ INSERT INTO `ordem_de_servico` (`OsNum`, `OsFuncMat`, `OsClienteCPF`, `OsVeicPla
 --
 -- Acionadores `ordem_de_servico`
 --
-
+DELIMITER $$
+CREATE TRIGGER `tr_alter_status` AFTER INSERT ON `ordem_de_servico` FOR EACH ROW BEGIN
+UPDATE veiculos
+SET veicStatusAlocado = 1
+WHERE veicPlaca = NEW.OsVeicPlaca and NEW.OsDataDevolucao <= curdate() and NEW.OsDataDevolucao >= curdate();
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tr_alterar_status` AFTER UPDATE ON `ordem_de_servico` FOR EACH ROW BEGIN
+    IF NEW.OsDataDevolucao IS NOT NULL AND NEW.OsDataDevolucao <= CURDATE() THEN
+        UPDATE veiculos
+        SET veicStatusAlocado = 0
+        WHERE veicPlaca = NEW.OsVeicPlaca;
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tr_calcular_pagamento` AFTER UPDATE ON `ordem_de_servico` FOR EACH ROW BEGIN
+ DECLARE resultado DECIMAL(10,2);
+ SELECT CatValor_km INTO resultado
+ FROM categoria
+ JOIN veiculos ON veiculos.veicCat = categoria.CatCod
+ WHERE veiculos.veicPlaca = NEW.OsVeicPlaca;
+ IF NEW.OsKMDevolucao IS NOT NULL THEN
+ UPDATE ordem_de_servico
+ SET OsValorPgto = (NEW.OsKMDevolucao - NEW.OsKMRetirada) * resultado
+ WHERE OsNum = NEW.OsNum;
+ END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 

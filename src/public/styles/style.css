@@ -1,6 +1,5 @@
 
 .main.container{
-
     background:  rgb(243, 241, 241);
     border-radius: 2rem;
   }
@@ -14,15 +13,16 @@
     color: black
   }
   
-  select{
-    border: none;
-    outline: none; 
-  }
+  
   .search{
     outline: red;
     border: none;
   }
-  i{
-    text-decoration: none;
+a i{
+    color: black;
+  }
+
+  a i:hover{
+    color: sienna;
   }
   

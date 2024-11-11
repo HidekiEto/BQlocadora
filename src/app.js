@@ -12,14 +12,12 @@ require('dotenv').config(); // carrega variáveis de ambiente de um arquivo .env
 const PASS = process.env.DATABASE_PASSWORD;
 // extrai o valor de DATABASE_PASSWORD do arquivo .env e armazena em PASS || isso ajuda a proteger dados sensíveis como senhas
 
-const rotas = require('./routers/userRoutes');
-// importa o arquivo de rotas cliente, que contém as definições de rotas para as operações CRUD.
+
 
 app.set('port', process.env.PORT || 3000); // configura a porta para o servidor || process.env.PORT permite definir uma porta através de uma variável de ambiente; caso contrário, usará a porta 3000.
 app.set('view engine', 'ejs'); // define ejs como o motor de visualização para renderizar páginas dinâmicas.
 app.set('views', path.join(__dirname, 'views')); // define a pasta views, onde estão armazenadas as páginas ejs, usando o caminho relativo views a partir do diretório atual.
 
-app.use(morgan('dev')); // usa morgan no modo dev para logar as requisições no console. 
 
 app.use(myConnection(mysql, { // configura uma conexão com o banco de dados MySQL utilizando o express-myconnection
     host: 'localhost',  // endereço do banco de dados
@@ -33,13 +31,19 @@ app.use(express.urlencoded({extended: false}));
 // usa o middleware express.urlencoded para analisar dados do corpo da requisição (formulários HTML), permitindo o acesso a req.body || extended: false limita o tipo de dados que pode ser enviado (aceita apenas strings e arrays)
 
 
+
+
+app.use(morgan('dev')); // usa morgan no modo dev para logar as requisições no console
+
+// // utiliza   o módulo de rotas rotas para tratar todas as requisições na URL raiz (/). Essas rotas são definidas no arquivo ./routers/cliente
+
+const rotas = require('./routers/userRoutes');
+// importa o arquivo de rotas cliente, que contém as definições de rotas para as operações CRUD.
+
+const clientRoutes = require('./routers/clientRoutes'); // Corrija o caminho se necessário
+app.use('/', clientRoutes);
+
 app.use('/', rotas);
-
-// utiliza   o módulo de rotas rotas para tratar todas as requisições na URL raiz (/). Essas rotas são definidas no arquivo ./routers/cliente
-
-//const registerRouter = require('./routers/registerRouter');
-//app.use('/', registerRouter);
-
 const userRouter = require('./routers/userRoutes');
 app.use('/', userRouter);
 
