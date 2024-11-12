@@ -59,23 +59,34 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th> @ </th>
                                     <th>CPF</th>
                                     <th>Nome</th>
                                     <th>Endereço</th>
                                     <th>Telefone</th>
-                                    <th>CIDADE</th>
+                                    <th>Cidade</th>
+                                    <th> Data de Nascimento </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td> OIIEE</td>
-                                    <td>OIIEEOIIEE</td>
-                                    <td>OIIEEOIIEEOIIEE</td>
-                                    <td>OIIEEOIIEEOIIEEOIIEE</td>
-                                    <td>
-                                        <a href="/" class="btn btn-danger">Excluir</a>
-                                        <a href="/" class="btn btn-info">Atualizar</a>
-                                    </td>
+                                <% if (novoCliente && novoCliente.length > 0) { %>
+                                    <% novoCliente.forEach((cliente, index) => { %>
+                                        <tr>
+                                            <td><%= index + 1 %></td>
+                                            <td><%= cliente.clienteCPF %></td>
+                                            <td><%= cliente.clienteNome %></td>
+                                            <td><%= cliente.clienteEnde %></td>
+                                            <td><%= cliente.clienteTel %></td>
+                                            <td><%= cliente.clienteCidade %></td>
+                                            <td><%= cliente.clienteDataNasc %></td>
+                                        </tr>
+                                    <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="7" class="text-center">Nenhum cliente encontrado.</td>
+                                    </tr>
+                                <% } %>
+                                
                                 </tr>
                             </tbody>
                         </table>
