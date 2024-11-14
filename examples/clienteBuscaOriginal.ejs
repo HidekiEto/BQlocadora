@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-between align-items-center py-2 mb-1 border-bottom">
+            <div class="d-flex align-items-center">
+                <a href="/" class="d-flex align-items-center mb-md-3 text-dark text-decoration-none">
+                    <img src="/imagens/logo.png" class="mt-3" width="100">
+                </a>
+                <ul class="nav me-auto d-flex p-4">
+                    <li class="nav-link px-2 link-secondary"> Clientes </li>
+                    <li><a href="funcionario.html" class="nav-link px-2 link-dark"> Funcionários </a></li>
+                    <li><a href="veiculos.html" class="nav-link px-2 link-dark"> Veículos </a></li>
+                    <li><a href="ods.html" class="nav-link px-2 link-dark"> Ordem de serviço </a></li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center">
+                <form class="col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="search border border-dark" placeholder="Search..." aria-label="Search">
+                </form>
+                <button type="button" class="btn btn-outline-dark me-2" onclick="window.location.href='/login';"> Logar </button>
+                <button type="button" class="btn btn-dark" onclick="window.location.href='/register';">Cadastre-se</button>
+            </div>
+        </header>
+    </div>
+    <div class="b-example-divider"></div>
+
+    <div class="d-flex justify-content-center align-items-center mb-3 pt-3">
+      <a href="/clientes">  <i class="bi bi-plus-circle me-5 ms-5 pt-2"></i> </a>
+        <h1 class="m-2 px-5"> Registro de Clientes </h1>
+        <div class="group-icon d-flex ms-5 pt-2">
+            <i class="bi bi-trash me-3"></i>
+            <i class="bi bi-pencil-square me-3"></i>
+            
+        </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+    <div class="main container d-flex justify-content-center align-items-center w-50">
+        <div class="row px-5">
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-md-7">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>CPF</th>
+                                    <th>Nome</th>
+                                    <th>Endereço</th>
+                                    <th>Telefone</th>
+                                    <th>Cidade</th>
+                                    <th> Data de Nascimento </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (novoCliente && novoCliente.length > 0) { %>
+                                    <% novoCliente.forEach((cliente) => { %>
+                                        <tr>
+                                            <td><%= cliente.clienteCPF %></td>
+                                            <td><%= cliente.clienteNome %></td>
+                                            <td><%= cliente.clienteEnde %></td>
+                                            <td><%= cliente.clienteTel %></td>
+                                            <td><%= cliente.clienteCidade %></td>
+                                            <td><%= cliente.clienteDataNasc %></td>
+                                        </tr>
+                                    <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="7" class="text-center">Nenhum cliente encontrado.</td>
+                                    </tr>
+                                <% } %>
+                                
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+</body>
+
+</html>

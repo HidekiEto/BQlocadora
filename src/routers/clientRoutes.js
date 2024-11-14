@@ -7,26 +7,20 @@ router.get('/clientes', (req, res) => {
     res.render('clientes');
 });
 
-router.post('/save', clientController.save);
+router.post('/clienteBusca/save', clientController.save);
 
-router.get('/clientes', (req, res) => {
-    res.render('clientes');
-});
+router.get('/clienteBusca', clientController.list);
 
-router.post('/save', clientController.save);
+router.get('/clienteBusca/next', clientController.next);
 
-router.get('/clienteBusca', (req, res) => {
-    req.getConnection((err, conn) => {
-        if (err) return res.status(500).json({ erro: "Erro de conexão com o banco de dados" });
-        
-        conn.query('SELECT * FROM clientes', (err, rows) => {
-            if (err) return res.status(500).json({ error: "Erro ao buscar os clientes" });
+router.get('/clienteBusca/prev', clientController.prev);
 
-            res.render('clienteBusca', {
-                novoCliente: rows
-            });
-        });
-    });
-});
+router.get('/clienteBusca/delete/:clienteCPF', clientController.delete);
+
+router.get('/clienteBusca/update/:clienteCPF', clientController.edit);
+      
+router.post('/clienteBusca/update/:clienteCPF', clientController.update);
+
+
 
 module.exports = router;

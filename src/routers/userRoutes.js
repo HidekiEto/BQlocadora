@@ -11,6 +11,8 @@ router.get('/login', (req, res) => {
     res.render('login'); // renderiza a página login 
 });
 
+
+
 router.post('/register', userController.register); // rota de cadastro de usuário
 
 router.post('/login', userController.login); // rota de login de usuário
