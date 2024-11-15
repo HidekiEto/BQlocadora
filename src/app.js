@@ -37,15 +37,22 @@ app.use(morgan('dev')); // usa morgan no modo dev para logar as requisições no
 
 // // utiliza   o módulo de rotas rotas para tratar todas as requisições na URL raiz (/). Essas rotas são definidas no arquivo ./routers/cliente
 
-const rotas = require('./routers/userRoutes');
-// importa o arquivo de rotas cliente, que contém as definições de rotas para as operações CRUD.
 
-const clientRoutes = require('./routers/clientRoutes'); // Corrija o caminho se necessário
-app.use('/', clientRoutes);
+// importa o arquivo das rotas, que contém as definições de rotas para as operações CRUD.
+const clientRouter = require('./routers/clientRoutes'); // Corrija o caminho se necessário
+app.use('/', clientRouter);
 
-app.use('/', rotas);
 const userRouter = require('./routers/userRoutes');
 app.use('/', userRouter);
+
+const funcRouter = require('./routers/funcRoutes');
+app.use('/', funcRouter);
+
+const odsRouter = require('./routers/odsRoutes');
+app.use('/', odsRouter);
+
+const veicRouter = require('./routers/veicRoutes'); // Corrija o caminho se necessário
+app.use('/', veicRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

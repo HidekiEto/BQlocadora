@@ -13,7 +13,6 @@
     color: black
   }
   
-  
   .search{
     outline: red;
     border: none;
@@ -25,4 +24,10 @@ a i{
   a i:hover{
     color: sienna;
   }
+
+  #search {
+    border: none;
+  }
+
+
   

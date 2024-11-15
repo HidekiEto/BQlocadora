@@ -16,7 +16,7 @@ controller.save = (req, res) => {
 controller.list = (req, res) => {
     const clienteIndex = parseInt(req.query.clienteIndex) || 0;
     req.getConnection((err, conn) => {
-        if (err) return res.status(500).json({ error: "Erro de conexão de " });
+        if (err) return res.status(500).json({ error: "Erro de conexão com o banco de dados " });
         conn.query('SELECT * FROM clientes', (err, clientes) => {
             if (err) return res.status(500).json({ error: "Erro ao localizar usuário" });
             const cliente = clientes[clienteIndex];

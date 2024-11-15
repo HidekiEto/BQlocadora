@@ -129,15 +129,16 @@ INSERT INTO `departamento` (`DeptoCod`, `DeptoNome`) VALUES
 --
 
 CREATE TABLE `funcionarios` (
-  `funcMatricula` int(4) NOT NULL,
+  `funcMatricula` int(4) NOT NULL
   `funcNome` varchar(40) NOT NULL,
   `funcDepto` int(1) NOT NULL,
   `funcSalario` decimal(8,2) NOT NULL,
   `funcAdmissao` date NOT NULL,
   `funcFilho` int(1) NOT NULL,
   `funcSexo` varchar(1) NOT NULL,
-  `funcAtivo` tinyint(1) NOT NULL
+   `funcAtivo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Extraindo dados da tabela `funcionarios`
@@ -162,9 +163,9 @@ INSERT INTO `funcionarios` (`funcMatricula`, `funcNome`, `funcDepto`, `funcSalar
 (1016, 'Wendell Navarro Perez', 3, '1212.00', '2004-04-15', 2, 'M', 1),
 (1017, 'Rodolfo Rodrigues', 1, '8500.00', '2022-09-10', 2, 'M', 1);
 
---
+
 -- Acionadores `funcionarios`
---
+
 DELIMITER $$
 CREATE TRIGGER `tr_add_usuario` AFTER INSERT ON `funcionarios` FOR EACH ROW BEGIN
     DECLARE usuarioSenha VARCHAR(8);
@@ -177,9 +178,9 @@ DELIMITER ;
 
 -- --------------------------------------------------------
 
---
+
 -- Estrutura da tabela `ordem_de_servico`
---
+
 
 CREATE TABLE `ordem_de_servico` (
   `OsNum` int(11) NOT NULL,
@@ -330,10 +331,10 @@ ALTER TABLE `departamento`
 
 --
 -- Índices para tabela `funcionarios`
---
-ALTER TABLE `funcionarios`
-  ADD PRIMARY KEY (`funcMatricula`),
-  ADD KEY `funcDepto` (`funcDepto`);
+-- --
+-- ALTER TABLE `funcionarios`
+--   ADD PRIMARY KEY (`funcMatricula`),
+--   ADD KEY `funcDepto` (`funcDepto`);
 
 --
 -- Índices para tabela `ordem_de_servico`
