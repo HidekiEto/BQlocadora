@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Ordem de serviço </title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-between align-items-center py-2 mb-1 border-bottom">
+      <div class="d-flex align-items-center">
+        <a href="/" class="d-flex align-items-center mb-md-3 text-dark text-decoration-none">
+          <img src="imagens/logo.png" class="mt-3" width="100">
+        </a>
+        <ul class="nav me-auto d-flex p-4">
+          <li><a href="/clientes" class="nav-link px-2 link-dark"> Clientes </a></li>
+          <li><a href="/funcionarios" class="nav-link px-2 link-dark"> Funcionários </a></li>
+          <li><a href="/veiculos" class="nav-link px-2 link-dark"> Veículos </a></li>
+          <li class="nav-link px-2 link-secondary"> Ordem de serviço </li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-outline-dark me-2" onclick="window.location.href='/login'" > Logar</button>
+        <button type="button" class="btn btn-dark" onclick="window.location.href='/register'" > Cadastres-se </button>
+      </div>
+    </header>
+  </div>
+  <div class="b-example-divider"></div>
+
+  <div class="d-flex justify-content-center align-items-center mb-3 pt-3">
+    <i class="bi bi-search me-5 ms-5 pt-2"> </i>
+    <h1 class="m-2 px-5"> Ordem de Serviço </h1>
+    <div class="group-icon d-flex ms-5 pt-2">
+      <i class="bi bi-trash me-3"></i>
+      <i class="bi bi-pencil-square me-3"></i>
+      <i class="bi bi-plus-circle"></i>
+    </div>
+  </div>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="main container d-flex justify-content-center align-items-center w-50">
+    <div class="row mx-3">
+      <!-- Coluna esquerda -->
+      <div class="col-md-6 pt-5 ">
+        <input placeholder="Número de Ordem de Serviço" type="text" class="mb-3 p-2 bg-transparent w-75" value="<%= odsAtual.odsNum %>"
+        <%=editar ? '' : 'readonly' %>>
+
+        <label class="form-label m-2"> Matrícula de Funcionário </label>
+        <select class="form-select btn-outline-light mb-3 w-75" >
+          <option value=""> 0238 - João Batista </option>
+          <option value="feminino"> 0026 - Marco Aurélio </option>
+          <option value="outro"> 9023 - Rebecca Corsi </option>
+        </select>
+        <label class="form-label m-2"> CPF do Cliente </label>
+        <select class="form-select btn-outline-light mb-3 w-75" >
+          <option value=""> 0238 - João Batista </option>
+          <option value="feminino"> 0026 - Marco Aurélio </option>
+          <option value="outro"> 9023 - Rebecca Corsi </option>
+        </select>
+        <label class="form-label m-2"> Placa do Veículo: </label>
+        <select class="form-select btn-outline-light mb-3 w-75">
+          <option value="masculino"> FDC-1234 - Fiat Uno </option>
+          <option value="feminino"> XYZ-9876 - Toyota Corolla </option>
+          <option value="outro"> ASD-3843 - Chevrolet Onix </option>
+        </select>
+      </div>
+  
+      <!-- Coluna direita -->
+      <div class="col pt-5">
+        <input placeholder="Data de Retirada" type="text" class="container mb-3 p-2 bg-transparent w-75" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <input placeholder="Data de Devolução" type="text" class="container mt-4 p-2 bg-transparent w-75" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <div class="d-flex justify-content-between pb-3 pt-4">
+            <input placeholder="Km Retirada" type="text" class="container m-2 p-3 bg-transparent w-50">
+            <input placeholder="Km Devolução" type="text" class="container m-2 p-3 bg-transparent w-50">
+        </div>
+        <label class="form-label m-2"> Status: </label>
+        <select class="form-select btn-outline-light mt-2 w-75" >
+          <option value="masculino"> Aberto </option>
+          <option value="feminino"> Em andamento </option>
+          <option value="outro"> Concluído </option>
+          <option value="outro"> Cancelado </option>
+        </select>
+      </div>
+      <div class="d-flex justify-content-center my-5">
+        <button class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar </button>
+        <button class="rounded-pill btn btn-outline-dark ms-5 w-25"> Salvar </button>
+      </div>
+    </div>
+    </div>
+  </div>
+  
+  <div class="d-flex justify-content-center text-center align-items-center m-3">
+    <button class="btn btn-outline-dark me-5 rounded-pill"> Primeiro </button>
+    <a href="/" class="text-black"> <i class="bi bi-chevron-double-left me-2 bg-light"></i> </a>
+    <span > 1/10 </span>
+    <a href="/" class="text-black"> <i class="bi bi-chevron-double-right ms-2 "></i> </a>
+    <button class="btn btn-outline-dark ms-5 rounded-pill"> Último </button>
+  </div>
+
+  </div>
+
+
+
+
+  <script src="js\script.js"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

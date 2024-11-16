@@ -38,7 +38,7 @@
         <div class="group-icon d-flex ms-5 pt-2">
             <a href="/clientes"><i class="bi bi-plus-circle m-3"></i> </a>
             <a href="/clienteBusca/delete/<%= clienteAtual.clienteCPF %>"> <i class="bi bi-trash me-3"> </i> </a>
-            <a href="/clienteBusca/update/<%= clienteAtual.clienteCPF %>"><i class="bi bi-pencil-square"></i> </a>
+            <a href="/clienteBusca/update/<%= clienteAtual.clienteCPF %>"> <i class="bi bi-pencil-square"></i> </a>
         </div>
         <h1 class="m-2 px-5"> Registros de Clientes </h1>
         <form class="col-lg-auto mb-3 mt-4">
@@ -67,9 +67,10 @@
                 <div class="col pt-5">
                     <input placeholder="Cidade" name="clienteCidade" class="container p-3 m-4 bg-transparent w-75"
                         value="<%= clienteAtual.clienteCidade %>" <%=editar ? '' : 'readonly' %> >
-                    <input placeholder="Data de Nascimento" name="clienteDataNasc"
+
+                        <input placeholder="Data de Nascimento" name="clienteDataNasc"
                         class="container p-3 m-4 bg-transparent w-75"
-                        value="<%=  clienteAtual.clienteDataNasc ? clienteAtual.clienteDataNasc.toISOString().split('T')[0] : '' %>"
+                        value="<%=  clienteAtual.clienteDataNasc %>"
                         <%=editar ? '' : 'readonly' %> >
                 </div>
                 <div class="d-flex justify-content-center m-5">

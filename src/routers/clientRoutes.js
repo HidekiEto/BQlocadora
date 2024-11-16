@@ -23,4 +23,8 @@ router.post('/clienteBusca/update/:clienteCPF', clientController.update);
 
 
 
+
+
+
+
 module.exports = router;

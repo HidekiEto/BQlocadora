@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Cadastro Funcionários </title>
-  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="/styles/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
@@ -26,71 +26,84 @@
         </ul>
       </div>
       <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-outline-dark me-2" onclick="Login()"> Logar </button>
-        <button type="button" class="btn btn-dark" onclick="Login()"> Cadastre-se </button>
+        <button type="button" class="btn btn-outline-dark me-2" onclick="window.location.href='/login'"> Logar </button>
+        <button type="button" class="btn btn-dark" onclick="window.location.href='/register'"> Cadastre-se </button>
       </div>
     </header>
   </div>
   <div class="b-example-divider"></div>
 
   <div class="d-flex justify-content-center align-items-center mb-3 pt-3">
-    <i class="bi bi-search me-5 ms-5 pt-2"> </i>
-    <h1 class="m-2 px-5"> Cadastro de Funcionários </h1>
     <div class="group-icon d-flex ms-5 pt-2">
-      <i class="bi bi-trash me-3"></i>
-      <i class="bi bi-pencil-square me-3"></i>
-      <i class="bi bi-plus-circle"></i>
-    </div>
+    <a href="/funcionarios"> <i class="bi bi-plus-circle m-3"></i> </a>
+    <a href="/funcBusca/delete/<%= funcionarioAtual.funcMatricula %>"> <i class="bi bi-trash me-3"> </i> </a>
+    <a href="/funcBusca/update/<%= funcionarioAtual.funcMatricula %>">  <i class="bi bi-pencil-square me-3"></i> </a>
+  </div>
+    <h1 class="m-2 px-5"> Registros de Funcionários </h1>
+    <form class="col-lg-auto mb-3 mt-4">
+      <input id="search" type="search" class="search border border-dark " placeholder="Search..." aria-label="Search">
+  </form>
+    
+     
+      
+    
   </div>
   </div>
   </div>
 
   </div>
 
-  <form action="<%= editar ? ('/funcionarios/update/' + funcionarioAtual.funcMatricula) : '' %>" method="post">
+  <form action="<%= editar ? ('/funcBusca/update/' + funcionarioAtual.funcMatricula) : '' %>" method="post">
   <div class="main container d-flex justify-content-center align-items-center w-50">
     <div class="row m-4">
       <!-- Coluna esquerda -->
       <div class="col-md-6 pt-1">
-        <input placeholder="Matrícula" name="funcMatricula" type="number" class="container m-4 p-3 bg-transparent w-75" required>
-         <input placeholder="Nome Completo" name="funcNome" type="text" class="container p-3 m-4 bg-transparent w-75">
-        <label class="mb-1 p-4 pt-1 pb-1"> Departamento: </label>
-        <select class="form-select btn-outline-light m-2" name="funcDepto">
-          <option value="1">1</option>
-          <option value="2">2</option>
+        <input placeholder="Matrícula" name="funcMatricula" class="container m-4 p-3 bg-transparent w-75" value="<%= funcionarioAtual.funcMatricula %>"
+        <%=editar ? '' : 'readonly' %> >
+         <input placeholder="Nome Completo" name="funcNome" class="container p-3 m-4 bg-transparent w-75" value="<%= funcionarioAtual.funcNome %>"
+         <%=editar ? '' : 'readonly' %>>
+         <select name="funcDepto" class="form-select btn-outline-light m-2" <%= editar ? '' : 'disabled' %>>
+          <option value="1" <%= funcionarioAtual.funcDepto == "1" ? 'selected' : '' %>>1</option>
+          <option value="2" <%= funcionarioAtual.funcDepto == "2" ? 'selected' : '' %>>2</option>
+          <option value="3" <%= funcionarioAtual.funcDepto == "3" ? 'selected' : '' %>>3</option>
+          <option value="4" <%= funcionarioAtual.funcDepto == "4" ? 'selected' : '' %>>4</option>
+          <option value="5" <%= funcionarioAtual.funcDepto == "5" ? 'selected' : '' %>>5</option>
         </select>
-        <input placeholder="Salário" name="funcSalario" type="text" class="container p-3 m-4 bg-transparent w-75">
+        <input placeholder="Salário"  class="container p-3 m-4 bg-transparent w-75" value="<%= funcionarioAtual.funcSalario %>"
+        <%=editar ? '' : 'readonly' %>>
         
       </div>
 
       <!-- Coluna direita -->
     <div class="col mx-3">
-        <input placeholder="Data de Admissão" name="funcAdmissao" class="container p-3 m-4 bg-transparent w-75" type="date"
-          onfocus="(this.type='date')" onblur="(this.type='text')">
+      <input placeholder="Data de Admissão" name="funcAdmissao"
+      class="container p-3 m-4 bg-transparent w-75"
+      value="<%=  funcionarioAtual.funcAdmissao ? funcionarioAtual.funcAdmissao.toISOString().split('T')[0] : '' %>"
+      <%=editar ? '' : 'readonly' %> >
         <label class="mb-1 p-4 pt-1 pb-1"> Quantidade de Filhos: </label>
-        <select class="form-select btn-outline-light m-2" name="funcFilho">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+        <select class="form-select btn-outline-light m-2" name="funcFilho" <%= editar ? '' : 'disabled' %>>
+          <option value="0" <%= funcionarioAtual.funcFilho == "0" ? 'selected' : '' %>>0</option>
+          <option value="1" <%= funcionarioAtual.funcFilho == "1" ? 'selected' : '' %>>1</option>
+          <option value="2" <%= funcionarioAtual.funcFilho == "2" ? 'selected' : '' %>>2</option>
+          <option value="3" <%= funcionarioAtual.funcFilho == "3" ? 'selected' : '' %>>3</option>
+          <option value="4" <%= funcionarioAtual.funcFilho == "4" ? 'selected' : '' %>>4</option>
+          <option value="5" <%= funcionarioAtual.funcFilho == "5" ? 'selected' : '' %>>5</option>
         </select>
         <label class="mb-2 p-4 pt-3 pb-1"> Gênero: </label>
-        <select  class="form-select btn-outline-light m-2" name="funcSexo">
-          <option value="m">Masculino</option>
-          <option value="f">Feminino</option>
-          <option value="o">Outro</option>
+        <select class="form-select btn-outline-light m-2" name="funcSexo" <%= editar ? '' : 'disabled' %>>
+          <option value="m" <%= funcionarioAtual.funcSexo == "m" ? 'selected' : '' %>>Masculino</option>
+          <option value="f" <%= funcionarioAtual.funcSexo == "f" ? 'selected' : '' %>>Feminino</option>
+          <option value="o" <%= funcionarioAtual.funcSexo == "o" ? 'selected' : '' %>>Outro</option>
         </select>
         <label class="form-label p-4 mb-1 pt-3 pb-1 font-weight-bolder text-dark"> Ativo </label>
         <div class="d-flex flex-wrap pb-3" >
-          <label class="m-2"> Sim <input type="radio" name="funcAtivo" value="1"></label>
-          <label class="m-2"> Não <input type="radio" name="funcAtivo" value="0"></label> 
+          <label class="m-2"> Sim <input type="radio" name="funcAtivo" value="1" <%= funcionarioAtual.funcAtivo == 1 ? 'checked' : '' %>></label>
+          <label class="m-2"> Não <input type="radio" name="funcAtivo" value="0" <%= funcionarioAtual.funcAtivo == 0 ? 'checked' : '' %>></label> 
          </div> 
       </div>
       <div class="d-flex justify-content-center m-5">
-        <button class="rounded-pill btn btn-outline-dark me-5 mx-1  w-25"> Cancelar </button>
-        <button class="rounded-pill btn btn-outline-dark ms-5 mx-5 w-25" type="submit"> Salvar </button>
+        <a href="/funcBusca" class="rounded-pill btn btn-outline-dark me-5 mx-1  w-25"> Cancelar </a>
+        <button class="rounded-pill btn btn-outline-dark ms-5 mx-5 w-25" type="submit"> <%= editar ? 'Atualizar' : 'Salvar' %> </button>
       </div>
     </div>
 </div>
@@ -99,13 +112,13 @@
   <% if (!editar) { %>
     <div class="d-flex justify-content-center text-center align-items-center m-3">
         <button class="btn btn-outline-dark mx-5 rounded-pill"> Primeiro </button>
-        <a href="/funcionarios/prev?funcionarioIndex=<%= funcionarioIndex %>" class="text-black">
+        <a href="/funcBusca/prev?funcionarioIndex=<%= funcionarioIndex %>" class="text-black">
             <i class="bi bi-chevron-double-left mx-2 bg-light"></i>
         </a>
         <span>
             <%= funcionarioIndex + 1 %> / <%= totalFuncionarios %>
         </span>
-        <a href="/funcionarios/next?funcionarioIndex=<%= funcionarioIndex %>" class="text-black">
+        <a href="/funcBusca/next?funcionarioIndex=<%= funcionarioIndex %>" class="text-black">
             <i class="bi bi-chevron-double-right mx-2"></i>
         </a>
         <button class="btn btn-outline-dark mx-5 rounded-pill"> Último </button>

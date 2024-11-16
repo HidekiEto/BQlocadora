@@ -24,10 +24,7 @@ a i{
   a i:hover{
     color: sienna;
   }
-
-  #search {
-    border: none;
+  select:disabled{
+    background: none; 
+    border: none; 
   }
-
-
-  

@@ -43,7 +43,7 @@ controller.next = (req, res) => {
 
             // Se o índice for maior que o número total de clientes, volta para o primeiro
             if (clienteIndex >= clientes.length) {
-                return res.redirect(`/buscaClientes?clienteIndex=0&totalClientes=${clientes.length}`);
+                return res.redirect(`/clienteBusca?clienteIndex=0&totalClientes=${clientes.length}`);
             }
 
             // Redireciona para o próximo cliente
@@ -113,6 +113,10 @@ controller.update = (req, res) => {
         });
     });
 };
+
+
+
+
 
 
 module.exports = controller;

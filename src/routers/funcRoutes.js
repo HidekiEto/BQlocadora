@@ -3,22 +3,30 @@ const router = express.Router();
 
 const funcController = require('../controllers/funcController');
 
-router.get('/funcionarios', funcController.list);
 
-router.get('/funcBusca', (req, res) => {
-    res.render('funcBusca');
+
+router.get('/funcionarios', (req, res) => {
+    res.render('funcionarios');
 });
 
-router.post('/funcionarios/save', funcController.save);
 
-router.get('/funcionarios/next', funcController.next);
 
-router.get('/funcionarios/prev', funcController.prev);
+router.get('/funcBusca', funcController.list);
 
-router.get('/funcionarios/delete/:funcMatricula', funcController.delete);
+router.post('/save', funcController.save);
 
-router.get('/funcionarios/update/:funcMatricula', funcController.edit);
+router.get('/funcBusca/next', funcController.next);
+
+router.get('/funcBusca/prev', funcController.prev);
+
+router.get('/funcBusca/delete/:funcMatricula', funcController.delete);
+
+router.get('/funcBusca/update/:funcMatricula', funcController.edit);
       
-router.post('/funcionarios/update/:funcMatricula', funcController.update);
+router.post('/funcBusca/update/:funcMatricula', funcController.update);
+
+
+
+
 
 module.exports = router;

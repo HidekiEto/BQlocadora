@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> Cadastro de veículos </title>
-  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="/styles/style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -25,74 +25,71 @@
         </ul>
       </div>
       <div class="d-flex align-items-center">
-        <button type="button" class="btn btn-outline-dark me-2" onclick="Login()"> Logar </button>
-        <button type="button" class="btn btn-dark" onclick="Login()">Cadastre-se</button>
+        <button type="button" class="btn btn-outline-dark me-2" onclick="window.location.href='/login'"> Logar </button>
+        <button type="button" class="btn btn-dark" onclick="window.location.href='/register'">Cadastre-se</button>
       </div>
     </header>
   </div>
   <div class="b-example-divider"></div>
 
   <div class="d-flex justify-content-center align-items-center mb-3 pt-3">
-    <i class="bi bi-search me-5 ms-5 pt-2"> </i>
+    <a href="/veicBusca"> <i class="bi bi-search me-5 ms-5 pt-2"> </i> </a>
     <h1 class="m-2 px-5"> Cadastro de Veículos </h1>
     <div class="group-icon d-flex ms-5 pt-2">
-      <i class="bi bi-trash me-3"></i>
-      <i class="bi bi-pencil-square me-3"></i>
-      <i class="bi bi-plus-circle"></i>
+      <a href="/veicBusca"> <i class="bi bi-trash me-3"> </i> </a>
+        <a href="/veicBusca"> <i class="bi bi-pencil-square me-3"></i> </a>
     </div>
   </div>
   </div>
   </div>
 
   </div>
-
+<form action="/veiculos/save" method="post">
   <div class="main container d-flex justify-content-center align-items-center w-50">
     <div class="row mx-3">
       <!-- Coluna esquerda -->
       <div class="col-md-6 pt-5">
-        <input placeholder="Placa" type="text" class="container m-4 p-3 bg-transparent w-75">
-        <input placeholder="Marca" type="text" class="container p-3 m-4 bg-transparent w-75">
-        <input placeholder="Ano" type="text" class="container p-3 m-4 bg-transparent w-75" >
-        <input placeholder="Cor" type="text" class="container m-4 p-3 bg-transparent w-75">
+        <input placeholder="Placa" name="veicPlaca" type="text" class="container m-4 p-3 bg-transparent w-75">
+        <input placeholder="Marca" name="veicMarca" type="text" class="container p-3 m-4 bg-transparent w-75">
+        <input placeholder="Modelo" name="veicModelo" type="text" class="container p-3 m-4 bg-transparent w-75" >
+        <input placeholder="Cor" name="veicCor" type="text" class="container m-4 p-3 bg-transparent w-75">
+        
+        
       </div>
   
       <!-- Coluna direita -->
       <div class="col pt-5">
-        <label class="mb-1 p-4 pt-1 pb-1"> Categoria: </label>
-        <select class="form-select btn-outline-light m-2" >
-          <option value="masculino">SUV </option>
-          <option value="feminino"> Hatch </option>
-          <option value="outro"> Sedan </option>
-        </select>
+        <input placeholder="Ano" name="veicAno" type="text" class="container p-3 m-4 bg-transparent w-75" >
         <label class="mb-1 p-4 pt-4 pb-1"> Combustível: </label>
-        <select class="form-select btn-outline-light m-2" >
-          <option value="masculino"> Gasolina </option>
-          <option value="feminino">Diesel </option>
-          <option value="outro"> Etanol </option>
+        <select class="form-select btn-outline-light m-2" name="veicComb">
+          <option value="G"> Gasolina </option>
+          <option value="D">Diesel </option>
+          <option value="E"> Etanol </option>
+          <option value="F"> Flex </option>
         </select>
-        <label class="form-label p-4 mb-1 pt-3 pb-1 font-weight-bolder text-dark">Status:</label>
+        <label class="mb-1 p-4 pt-1 pb-1"> Categoria: </label>
+        <select class="form-select btn-outline-light m-2" name="veicCat">
+          <option value="1"> SUV </option>
+          <option value="2"> Hatch </option>
+          <option value="3"> Sedan </option>
+          <option value="4"> Caminhonete </option>
+        </select>
+       
+        <label class="form-label p-4 mb-1 pt-3 pb-1 font-weight-bolder text-dark">Status</label>
         <div class="d-flex flex-wrap pb-3">
-          <label class="m-2">Disponivel <input type="radio" name="status"></label>
-          <label class="m-2">Alocado <input type="radio" name="status"></label>
+          <label class="m-2"> Disponivel <input type="radio" value="1" name="veicStatusAlocado"></label>
+          <label class="m-2"> Alocado <input type="radio" value="0" name="veicStatusAlocado"></label>
         </div>
       </div>
       <div class="d-flex justify-content-center my-5">
-        <button class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar </button>
-        <button class="rounded-pill btn btn-outline-dark ms-5 w-25"> Salvar </button>
+        <a href="/veiculos" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar </a>
+        <button class="rounded-pill btn btn-outline-dark ms-5 w-25" type="submit"> Salvar </button>
       </div>
     </div>
     </div>
   </div>
-  
-  <div class="d-flex justify-content-center text-center align-items-center m-3">
-    <button class="btn btn-outline-dark me-5 rounded-pill"> Primeiro </button>
-    <a href="/" class="text-black"> <i class="bi bi-chevron-double-left me-2 bg-light"></i> </a>
-    <span > 1/10 </span>
-    <a href="/" class="text-black"> <i class="bi bi-chevron-double-right ms-2 "></i> </a>
-    <button class="btn btn-outline-dark ms-5 rounded-pill"> Último </button>
-  </div>
-
-  </div>
+</form>
+ 
 
 
 
