@@ -53,7 +53,7 @@
   <form action="<%= editar ? ('/odsBusca/update/' + odsAtual.OsNum) : '' %>" method="post">
     <div class="main container d-flex justify-content-center align-items-center w-50">
       <div class="row mx-3">
-        <!-- Coluna esquerda -->
+        <!-- coluna esquerda -->
         <div class="col-md-6 pt-5 ">
           <input placeholder="Número de Ordem de Serviço" type="text" class="mb-3 p-2 bg-transparent w-75"
             value="<%= odsAtual.OsNum %>" <%=editar ? '' : 'readonly' %>>
@@ -92,7 +92,7 @@
 
         </div>
 
-        <!-- Coluna direita -->
+        <!-- coluna direita -->
         <div class="col pt-5">
           <input placeholder="Data de Retirada" name="OsDataRetirada" type="text" class="container mb-3 p-2 bg-transparent w-75"
             onfocus="(this.type='date')" onblur="(this.type='text')" value="<%=  odsAtual.OsDataRetirada ? odsAtual.OsDataRetirada.toISOString().split('T')[0] : '' %>"

@@ -42,7 +42,7 @@ controller.save = (req, res) => {
 
 
 controller.next = (req, res) => {
-    const funcionarioIndex = parseInt(req.query.funcionarioIndex) + 1; // Incrementa o índice
+    const funcionarioIndex = parseInt(req.query.funcionarioIndex) + 1; 
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json('Erro ao conectar ao banco de dados');
 
@@ -51,19 +51,19 @@ controller.next = (req, res) => {
                 return res.status(500).send('Erro ao consultar os funcionarios');
             }
 
-            // Se o índice for maior que o número total de funcionarios, volta para o primeiro
+            // se o índice for maior que o número total de funcionarios, volta para o primeiro
             if (funcionarioIndex >= funcionarios.length) {
                 return res.redirect(`/funcBusca?funcionarioIndex=0&totalFuncionarios=${funcionarios.length}`);
             }
 
-            // Redireciona para o próximo funcionario
+            // redireciona para o próximo funcionario
             res.redirect(`/funcBusca?funcionarioIndex=${funcionarioIndex}&totalFuncionarios=${funcionarios.length}`);
         });
     });
 };
 
 controller.prev = (req, res) => {
-    const funcionarioIndex = parseInt(req.query.funcionarioIndex) - 1; // Decrementa o índice
+    const funcionarioIndex = parseInt(req.query.funcionarioIndex) - 1; 
     req.getConnection((err, conn) => {
         if (err) {
             return res.status(500).send('Erro ao conectar ao banco de dados');
@@ -72,13 +72,13 @@ controller.prev = (req, res) => {
         conn.query('SELECT * FROM funcionarios', (err, funcionarios) => {
             if (err) return res.status(500).json('Erro ao consultar os funcionarios');
             const totalFuncionarios = funcionarios.length;
-            // Se o índice for menor que 0, volta para o último funcionario
+            // se o índice for menor que 0, volta para o último funcionario
             if (funcionarioIndex < 0) {
                 return res.redirect(`/funcBusca?funcionarioIndex=${funcionarios.length - 1}&totalFuncionarios=${totalFuncionarios}`);
             }
 
 
-            // Redireciona para o funcionario anterior
+            // redireciona para o funcionario anterior
             res.redirect(`/funcBusca?funcionarioIndex=${funcionarioIndex}&totalFuncionarios=${totalFuncionarios}`);
         });
     });

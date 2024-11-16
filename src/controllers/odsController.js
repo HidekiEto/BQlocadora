@@ -5,7 +5,7 @@ controller.save = (req, res) => {
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
         conn.query('INSERT INTO ordem_de_servico SET ?', [data], (err, rows) => {
-            if (err) return res.status(500).json({ error: "Erro ao salvar nova Ordem De Serviço" }); // Fixed typo here
+            if (err) return res.status(500).json({ error: "Erro ao salvar nova Ordem De Serviço" }); 
             res.redirect('/ods');
         });
     });
@@ -43,7 +43,7 @@ controller.list = (req, res) => {
 
 
 controller.next = (req, res) => {
-    const odsIndex = parseInt(req.query.odsIndex) + 1; // Incrementa o índice
+    const odsIndex = parseInt(req.query.odsIndex) + 1; 
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json('Erro ao conectar ao banco de dados');
 
@@ -64,7 +64,7 @@ controller.next = (req, res) => {
 };
 
 controller.prev = (req, res) => {
-    const odsIndex = parseInt(req.query.odsIndex) - 1; // Decrementa o índice
+    const odsIndex = parseInt(req.query.odsIndex) - 1; 
     req.getConnection((err, conn) => {
         if (err) {
             return res.status(500).send('Erro ao conectar ao banco de dados');
@@ -156,7 +156,7 @@ controller.getOdsData = (req, res) => {
                 conn.query('SELECT veicPlaca, veicModelo FROM veiculos', (err, veiculos) => {
                     if (err) return res.status(500).json({ error: "Erro ao buscar clientes" });
 
-                    // Renderiza o ods.ejs com os dois conjuntos de dados
+                    // renderiza o ods.ejs com os dois conjuntos de dados
                     res.render('ods', { funcionarios, clientes, veiculos });
                 });
             });
@@ -165,7 +165,7 @@ controller.getOdsData = (req, res) => {
 };
 
 controller.search = (req, res) => {
-    const { OsNum } = req.query; // Obtém o número da ODS da query string
+    const { OsNum } = req.query; // obtém o número da ODS da query string
 
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
@@ -174,7 +174,7 @@ controller.search = (req, res) => {
             if (err || ods.length === 0) 
                 return res.status(404).json({ error: "Ordem de Serviço não encontrada" });
 
-            // Encontrar a ODS buscada
+            // encontrar a ODS buscada
             const odsIndex = ods.findIndex(item => item.OsNum == OsNum);
             if (odsIndex === -1) {
                 return res.status(404).json({ error: "Ordem de Serviço não encontrada" });

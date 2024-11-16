@@ -32,7 +32,7 @@ controller.save = (req, res) => {
 
 
 controller.next = (req, res) => {
-    const veiculoIndex = parseInt(req.query.veiculoIndex) + 1; // Incrementa o índice
+    const veiculoIndex = parseInt(req.query.veiculoIndex) + 1; 
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json('Erro ao conectar ao banco de dados');
 

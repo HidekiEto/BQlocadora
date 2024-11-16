@@ -62,13 +62,13 @@ controller.prev = (req, res) => {
         conn.query('SELECT * FROM clientes', (err, clientes) => {
             if (err) return res.status(500).json('Erro ao consultar os clientes');
             const totalClientes = clientes.length;
-            // Se o índice for menor que 0, volta para o último cliente
+            // se o índice for menor que 0, volta para o último cliente
             if (clienteIndex < 0) {
                 return res.redirect(`/clienteBusca?clienteIndex=${clientes.length - 1}&totalClientes=${totalClientes}`);
             }
 
 
-            // Redireciona para o cliente anterior
+            // redireciona para o cliente anterior
             res.redirect(`/clienteBusca?clienteIndex=${clienteIndex}&totalClientes=${totalClientes}`);
         });
     });
@@ -104,22 +104,22 @@ controller.edit = (req, res) => {
 controller.update = (req, res) => {
     const { clienteCPF } = req.params;
     const novoCliente = req.body;
-    const clienteIndex = req.body.clienteIndex || 0; // Pegue o clienteIndex enviado pelo formulário
+    const clienteIndex = req.body.clienteIndex || 0; // pegue o clienteIndex enviado pelo formulário
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao concetar ao banco de dados" });
         conn.query('UPDATE clientes set ? WHERE clienteCPF = ?', [novoCliente, clienteCPF], (err, cliente) => {
             if (err) return res.status(500).json({ error: "Erro ao atualizar cliente" });
-            res.redirect(`/clienteBusca?clienteIndex=${clienteIndex}`); // Redirecione para o cliente atualizado
+            res.redirect(`/clienteBusca?clienteIndex=${clienteIndex}`); // redirecione para o cliente atualizado
         });
     });
 };
 
 controller.search = (req, res) => {
-    const query = req.query.query; // CPF ou Nome do cliente a buscar
+    const query = req.query.query; // CPF ou Nome do cliente que vai buscar
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
 
-        // Consulta por CPF exato ou Nome que contenha a query
+        // consulta por CPF exato ou Nome que contenha a query
         const sql = `
             SELECT * FROM clientes 
             WHERE clienteCPF = ? OR clienteNome LIKE ?
@@ -129,19 +129,19 @@ controller.search = (req, res) => {
         conn.query(sql, values, (err, clientes) => {
             if (err) return res.status(500).json({ error: "Erro ao buscar cliente" });
 
-            // Buscar todos os clientes para calcular a posição
+            // buscar todos os clientes para calcular a posição
             conn.query('SELECT * FROM clientes', (err, todosClientes) => {
                 if (err) return res.status(500).json({ error: "Erro ao listar todos os clientes" });
 
                 if (clientes.length > 0) {
-                    // Encontrar a posição do cliente buscado na lista completa
+                    // encontrar a posição do cliente buscado na lista completa
                     const clienteIndex = todosClientes.findIndex(c => c.clienteCPF === clientes[0].clienteCPF);
 
                     res.render('clienteBusca', {
-                        clienteAtual: clientes[0], // Primeiro cliente encontrado
+                        clienteAtual: clientes[0], // primeiro cliente encontrado
                         clienteIndex: clienteIndex >= 0 ? clienteIndex : 0,
                         totalClientes: todosClientes.length,
-                        data: todosClientes, // Passa a lista completa
+                        data: todosClientes, // passa a lista completa
                         editar: false,
                     });
                 } else {
