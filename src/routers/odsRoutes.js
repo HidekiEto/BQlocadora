@@ -21,4 +21,7 @@ router.get('/odsBusca/update/:OsNum', odsController.edit);
       
 router.post('/odsBusca/update/:OsNum', odsController.update);
 
+router.get('/odsBusca/search', odsController.search);
+
+
 module.exports = router;

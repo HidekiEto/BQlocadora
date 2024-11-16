@@ -125,6 +125,54 @@ controller.update = (req, res) => {
     });
 };
 
+controller.search = (req, res) => {
+    const query = req.query.query; // Matrícula ou Nome do funcionário a buscar
+    req.getConnection((err, conn) => {
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+
+        // Consulta por Matrícula exata ou Nome que contenha a query
+        const sql = `
+            SELECT * FROM funcionarios 
+            WHERE funcMatricula = ? OR funcNome LIKE ?
+        `;
+        const values = [query, `%${query}%`];
+
+        conn.query(sql, values, (err, funcionarios) => {
+            if (err) return res.status(500).json({ error: "Erro ao buscar funcionário" });
+
+            // Buscar todos os funcionários para calcular a posição
+            conn.query('SELECT * FROM funcionarios', (err, todosFuncionarios) => {
+                if (err) return res.status(500).json({ error: "Erro ao listar todos os funcionários" });
+
+                if (funcionarios.length > 0) {
+                    // Encontrar a posição do funcionário buscado na lista completa
+                    const funcionarioIndex = todosFuncionarios.findIndex(
+                        f => f.funcMatricula === funcionarios[0].funcMatricula
+                    );
+
+                    res.render('funcBusca', {
+                        funcionarioAtual: funcionarios[0], // Primeiro funcionário encontrado
+                        funcionarioIndex: funcionarioIndex >= 0 ? funcionarioIndex : 0,
+                        totalFuncionarios: todosFuncionarios.length,
+                        data: todosFuncionarios, // Passa a lista completa
+                        editar: false,
+                    });
+                } else {
+                    res.render('funcBusca', {
+                        funcionarioAtual: null,
+                        funcionarioIndex: 0,
+                        totalFuncionarios: 0,
+                        data: [],
+                        editar: false,
+                        mensagem: "Nenhum funcionário encontrado.",
+                    });
+                }
+            });
+        });
+    });
+};
+
+
 
 
 module.exports = controller;

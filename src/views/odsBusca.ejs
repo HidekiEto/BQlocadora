@@ -39,9 +39,11 @@
       <a href="/odsBusca/update/<%= odsAtual.OsNum %>">  <i class="bi bi-pencil-square me-3"></i> </a>
     </div>
     <h1 class="m-2 px-5"> Registro de Ordem de Serviço </h1>
-    <form class="col-lg-auto mb-3 mt-4">
-      <input id="search" type="search" class="search border border-dark " placeholder="Search..." aria-label="Search">
+    <form action="/odsBusca/search" method="get" class="col-lg-auto mb-3 mt-4">
+      <input type="search" name="OsNum" class="form-control" placeholder="Número da ODS" required>
   </form>
+  
+  
     
   </div>
   </div>

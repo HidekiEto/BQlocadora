@@ -163,6 +163,52 @@ controller.getOdsData = (req, res) => {
         });
     });
 };
+
+controller.search = (req, res) => {
+    const { OsNum } = req.query; // Obtém o número da ODS da query string
+
+    req.getConnection((err, conn) => {
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+
+        conn.query('SELECT * FROM ordem_de_servico', (err, ods) => {
+            if (err || ods.length === 0) 
+                return res.status(404).json({ error: "Ordem de Serviço não encontrada" });
+
+            // Encontrar a ODS buscada
+            const odsIndex = ods.findIndex(item => item.OsNum == OsNum);
+            if (odsIndex === -1) {
+                return res.status(404).json({ error: "Ordem de Serviço não encontrada" });
+            }
+
+            const ODS = ods[odsIndex];
+            conn.query('SELECT funcMatricula, funcNome FROM funcionarios', (err, funcionarios) => {
+                if (err) return res.status(500).json({ error: "Erro ao buscar funcionários" });
+
+                conn.query('SELECT clienteCPF, clienteNome FROM clientes', (err, clientes) => {
+                    if (err) return res.status(500).json({ error: "Erro ao buscar clientes" });
+
+                    conn.query('SELECT veicPlaca, veicModelo FROM veiculos', (err, veiculos) => {
+                        if (err) return res.status(500).json({ error: "Erro ao buscar veículos" });
+
+                        res.render('odsBusca', {
+                            odsAtual: ODS,
+                            odsIndex: odsIndex,
+                            totalOds: ods.length,
+                            editar: false,
+                            funcionarios,
+                            clientes,
+                            veiculos,
+                        });
+                    });
+                });
+            });
+        });
+    });
+};
+
+
+
+
 module.exports = controller;
 
 

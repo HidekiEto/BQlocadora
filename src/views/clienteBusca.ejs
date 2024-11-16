@@ -90,21 +90,26 @@
             </div>
         </div>
 
-        <% if (!editar) { %>
+        <% if (!editar && clienteAtual) { %>
             <div class="d-flex justify-content-center text-center align-items-center m-3">
-                <button class="btn btn-outline-dark mx-5 rounded-pill"> Primeiro </button>
+                <a href="/clienteBusca?clienteIndex=0" class="btn btn-outline-dark mx-5 rounded-pill"> Primeiro </a>
+        
                 <a href="/clienteBusca/prev?clienteIndex=<%= clienteIndex %>" class="text-black">
                     <i class="bi bi-chevron-double-left mx-2 bg-light"></i>
                 </a>
+        
                 <span>
                     <%= clienteIndex + 1 %> / <%= totalClientes %>
                 </span>
+        
                 <a href="/clienteBusca/next?clienteIndex=<%= clienteIndex %>" class="text-black">
                     <i class="bi bi-chevron-double-right mx-2"></i>
                 </a>
-                <button class="btn btn-outline-dark mx-5 rounded-pill"> Último </button>
+        
+                <a href="/clienteBusca?clienteIndex=<%= totalClientes - 1 %>" class="btn btn-outline-dark mx-5 rounded-pill"> Último </a>
             </div>
-            <% } %>
+        <% } %>
+        
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

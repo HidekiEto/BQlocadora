@@ -33,12 +33,22 @@
   <div class="b-example-divider"></div>
 
   <div class="d-flex justify-content-center align-items-center mb-3 pt-3">
-    <a href="/veiculos"> <i class="bi bi-search me-5 ms-5 pt-2"> </i> </a>
-    <h1 class="m-2 px-5"> Registro de Veículos </h1>
     <div class="group-icon d-flex ms-5 pt-2">
+      <a href="/veiculos"> <i class="bi bi-plus-circle m-3"> </i> </a>
       <a href="/veicBusca/delete/<%= veiculoAtual.veicPlaca %>"> <i class="bi bi-trash me-3"> </i> </a>
         <a href="/veicBusca/update/<%= veiculoAtual.veicPlaca %>"> <i class="bi bi-pencil-square me-3"></i> </a>
     </div>
+    <h1 class="m-2 px-5"> Registro de Veículos </h1>
+    <form action="/veicBusca/search" method="get" class="col-lg-auto mb-3 mt-4" >
+      <input 
+          id="search" 
+          type="search" 
+          name="query" 
+          class="search border border-dark" 
+          placeholder="Digite a Placa ou Modelo..." 
+          aria-label="Search"
+      >
+  </form>
   </div>
   </div>
   </div>
@@ -88,7 +98,7 @@
       </div>
       <% if (editar) { %>
         <div class="d-flex justify-content-center my-5">
-          <a href="/odsBusca" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar  </a>
+          <a href="/veicBusca" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar  </a>
           <button class="rounded-pill btn btn-outline-dark ms-5 w-25" type="submit"> Atualizar </button>
         </div>
         <% } %>

@@ -27,6 +27,7 @@ router.post('/funcBusca/update/:funcMatricula', funcController.update);
 
 
 
+router.get('/funcBusca/search', funcController.search);
 
 
 module.exports = router;

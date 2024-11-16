@@ -40,8 +40,15 @@
     <a href="/funcBusca/update/<%= funcionarioAtual.funcMatricula %>">  <i class="bi bi-pencil-square me-3"></i> </a>
   </div>
     <h1 class="m-2 px-5"> Registros de Funcionários </h1>
-    <form class="col-lg-auto mb-3 mt-4">
-      <input id="search" type="search" class="search border border-dark " placeholder="Search..." aria-label="Search">
+    <form action="/funcBusca/search" method="get" class="col-lg-auto mb-3 mt-4" >
+      <input 
+          id="search" 
+          type="search" 
+          name="query" 
+          class="search border border-dark" 
+          placeholder="Digite a Matrícula ou Nome..." 
+          aria-label="Search"
+      >
   </form>
     
      
@@ -102,12 +109,12 @@
          </div> 
       </div>
       <% if (editar) { %>
-        <div class="d-flex justify-content-center my-5">
-          <a href="/odsBusca" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar  </a>
-          <button class="rounded-pill btn btn-outline-dark ms-5 w-25" type="submit"> Atualizar </button>
-        </div>
-        <% } %>
-      
+          <div class="d-flex justify-content-center my-5">
+            <a href="/odsBusca" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar  </a>
+            <button class="rounded-pill btn btn-outline-dark ms-5 w-25" type="submit"> Atualizar </button>
+          </div>
+          <% } %>
+        
     </div>
 </div>
   

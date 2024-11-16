@@ -32,7 +32,7 @@ controller.list = (req, res) => {
 };
 
 controller.next = (req, res) => {
-    const clienteIndex = parseInt(req.query.clienteIndex) + 1; // Incrementa o índice
+    const clienteIndex = parseInt(req.query.clienteIndex) + 1; // incrementa o índice
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json('Erro ao conectar ao banco de dados');
 
@@ -41,12 +41,12 @@ controller.next = (req, res) => {
                 return res.status(500).send('Erro ao consultar os clientes');
             }
 
-            // Se o índice for maior que o número total de clientes, volta para o primeiro
+            // se o índice for maior que o número total de clientes, volta para o primeiro
             if (clienteIndex >= clientes.length) {
                 return res.redirect(`/clienteBusca?clienteIndex=0&totalClientes=${clientes.length}`);
             }
 
-            // Redireciona para o próximo cliente
+            // redireciona para o próximo cliente
             res.redirect(`/clienteBusca?clienteIndex=${clienteIndex}&totalClientes=${clientes.length}`);
         });
     });
@@ -115,41 +115,50 @@ controller.update = (req, res) => {
 };
 
 controller.search = (req, res) => {
-    const query = req.query.query; // Pega o valor da busca (CPF ou Nome)
+    const query = req.query.query; // CPF ou Nome do cliente a buscar
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
 
         // Consulta por CPF exato ou Nome que contenha a query
         const sql = `
             SELECT * FROM clientes 
-            WHERE clienteCPF = ? OR clienteNome LIKE ? 
+            WHERE clienteCPF = ? OR clienteNome LIKE ?
         `;
         const values = [query, `%${query}%`];
 
         conn.query(sql, values, (err, clientes) => {
             if (err) return res.status(500).json({ error: "Erro ao buscar cliente" });
 
-            if (clientes.length > 0) {
-                res.render('clienteBusca', {
-                    clienteAtual: clientes[0], // Retorna o primeiro resultado
-                    clienteIndex: 0, // Ajuste o índice como 0 para exibição inicial
-                    totalClientes: clientes.length,
-                    data: clientes, // Retorna todos os resultados (caso seja necessário)
-                    editar: false,
-                });
-            } else {
-                res.render('clienteBusca', {
-                    clienteAtual: null,
-                    clienteIndex: 0,
-                    totalClientes: 0,
-                    data: [],
-                    editar: false,
-                    mensagem: "Nenhum cliente encontrado.",
-                });
-            }
+            // Buscar todos os clientes para calcular a posição
+            conn.query('SELECT * FROM clientes', (err, todosClientes) => {
+                if (err) return res.status(500).json({ error: "Erro ao listar todos os clientes" });
+
+                if (clientes.length > 0) {
+                    // Encontrar a posição do cliente buscado na lista completa
+                    const clienteIndex = todosClientes.findIndex(c => c.clienteCPF === clientes[0].clienteCPF);
+
+                    res.render('clienteBusca', {
+                        clienteAtual: clientes[0], // Primeiro cliente encontrado
+                        clienteIndex: clienteIndex >= 0 ? clienteIndex : 0,
+                        totalClientes: todosClientes.length,
+                        data: todosClientes, // Passa a lista completa
+                        editar: false,
+                    });
+                } else {
+                    res.render('clienteBusca', {
+                        clienteAtual: null,
+                        clienteIndex: 0,
+                        totalClientes: 0,
+                        data: [],
+                        editar: false,
+                        mensagem: "Nenhum cliente encontrado.",
+                    });
+                }
+            });
         });
     });
 };
+
 
 
 

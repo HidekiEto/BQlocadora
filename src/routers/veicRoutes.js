@@ -23,4 +23,7 @@ router.get('/veicBusca/update/:veicPlaca', veicController.edit);
       
 router.post('/veicBusca/update/:veicPlaca', veicController.update);
 
+router.get('/veicBusca/search', veicController.search);
+
+
 module.exports = router;

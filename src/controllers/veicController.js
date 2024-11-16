@@ -41,19 +41,19 @@ controller.next = (req, res) => {
                 return res.status(500).send('Erro ao consultar os veiculos');
             }
 
-            // Se o índice for maior que o número total de veiculos, volta para o primeiro
+            // se o índice for maior que o número total de veiculos, volta para o primeiro
             if (veiculoIndex >= veiculos.length) {
                 return res.redirect(`/veicBusca?veiculoIndex=0&totalVeiculos=${veiculos.length}`);
             }
 
-            // Redireciona para o próximo veiculo
+            // redireciona para o próximo veiculo
             res.redirect(`/veicBusca?veiculoIndex=${veiculoIndex}&totalVeiculos=${veiculos.length}`);
         });
     });
 };
 
 controller.prev = (req, res) => {
-    const veiculoIndex = parseInt(req.query.veiculoIndex) - 1; // Decrementa o índice
+    const veiculoIndex = parseInt(req.query.veiculoIndex) - 1; // diminui o indice
     req.getConnection((err, conn) => {
         if (err) {
             return res.status(500).send('Erro ao conectar ao banco de dados');
@@ -62,13 +62,13 @@ controller.prev = (req, res) => {
         conn.query('SELECT * FROM veiculos', (err, veiculos) => {
             if (err) return res.status(500).json('Erro ao consultar os veiculos');
             const totalVeiculos = veiculos.length;
-            // Se o índice for menor que 0, volta para o último veiculo
+            // se o índice for menor que 0, volta para o último veiculo
             if (veiculoIndex < 0) {
                 return res.redirect(`/veicBusca?veiculoIndex=${veiculos.length - 1}&totalVeiculos=${totalVeiculos}`);
             }
 
 
-            // Redireciona para o veiculo anterior
+            // redireciona para o veiculo anterior
             res.redirect(`/veicBusca?veiculoIndex=${veiculoIndex}&totalVeiculos=${totalVeiculos}`);
         });
     });
@@ -114,5 +114,53 @@ controller.update = (req, res) => {
         });
     });
 };
+
+controller.search = (req, res) => {
+    const query = req.query.query; 
+    req.getConnection((err, conn) => {
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+
+    
+        const sql = `
+            SELECT * FROM veiculos 
+            WHERE veicPlaca = ?
+        `;
+        const values = [query, `%${query}%`];
+
+        conn.query(sql, values, (err, veiculos) => {
+            if (err) return res.status(500).json({ error: "Erro ao buscar veículo" });
+
+         
+            conn.query('SELECT * FROM veiculos', (err, todosVeiculos) => {
+                if (err) return res.status(500).json({ error: "Erro ao listar todos os veículos" });
+
+                if (veiculos.length > 0) {
+                
+                    const veiculoIndex = todosVeiculos.findIndex(
+                        v => v.veicPlaca === veiculos[0].veicPlaca
+                    );
+
+                    res.render('veicBusca', {
+                        veiculoAtual: veiculos[0], 
+                        veiculoIndex: veiculoIndex >= 0 ? veiculoIndex : 0,
+                        totalVeiculos: todosVeiculos.length,
+                        data: todosVeiculos, 
+                        editar: false,
+                    });
+                } else {
+                    res.render('veicBusca', {
+                        veiculoAtual: null,
+                        veiculoIndex: 0,
+                        totalVeiculos: 0,
+                        data: [],
+                        editar: false,
+                        mensagem: "Nenhum veículo encontrado.",
+                    });
+                }
+            });
+        });
+    });
+};
+
 
 module.exports = controller;
