@@ -22,6 +22,8 @@ router.get('/clienteBusca/update/:clienteCPF', clientController.edit);
 router.post('/clienteBusca/update/:clienteCPF', clientController.update);
 
 
+router.get('/clienteBusca/search', clientController.search);
+
 
 
 

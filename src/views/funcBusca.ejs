@@ -101,10 +101,13 @@
           <label class="m-2"> Não <input type="radio" name="funcAtivo" value="0" <%= funcionarioAtual.funcAtivo == 0 ? 'checked' : '' %>></label> 
          </div> 
       </div>
-      <div class="d-flex justify-content-center m-5">
-        <a href="/funcBusca" class="rounded-pill btn btn-outline-dark me-5 mx-1  w-25"> Cancelar </a>
-        <button class="rounded-pill btn btn-outline-dark ms-5 mx-5 w-25" type="submit"> <%= editar ? 'Atualizar' : 'Salvar' %> </button>
-      </div>
+      <% if (editar) { %>
+        <div class="d-flex justify-content-center my-5">
+          <a href="/odsBusca" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar  </a>
+          <button class="rounded-pill btn btn-outline-dark ms-5 w-25" type="submit"> Atualizar </button>
+        </div>
+        <% } %>
+      
     </div>
 </div>
   

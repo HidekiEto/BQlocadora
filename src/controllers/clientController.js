@@ -114,6 +114,43 @@ controller.update = (req, res) => {
     });
 };
 
+controller.search = (req, res) => {
+    const query = req.query.query; // Pega o valor da busca (CPF ou Nome)
+    req.getConnection((err, conn) => {
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+
+        // Consulta por CPF exato ou Nome que contenha a query
+        const sql = `
+            SELECT * FROM clientes 
+            WHERE clienteCPF = ? OR clienteNome LIKE ? 
+        `;
+        const values = [query, `%${query}%`];
+
+        conn.query(sql, values, (err, clientes) => {
+            if (err) return res.status(500).json({ error: "Erro ao buscar cliente" });
+
+            if (clientes.length > 0) {
+                res.render('clienteBusca', {
+                    clienteAtual: clientes[0], // Retorna o primeiro resultado
+                    clienteIndex: 0, // Ajuste o índice como 0 para exibição inicial
+                    totalClientes: clientes.length,
+                    data: clientes, // Retorna todos os resultados (caso seja necessário)
+                    editar: false,
+                });
+            } else {
+                res.render('clienteBusca', {
+                    clienteAtual: null,
+                    clienteIndex: 0,
+                    totalClientes: 0,
+                    data: [],
+                    editar: false,
+                    mensagem: "Nenhum cliente encontrado.",
+                });
+            }
+        });
+    });
+};
+
 
 
 

@@ -41,8 +41,15 @@
             <a href="/clienteBusca/update/<%= clienteAtual.clienteCPF %>"> <i class="bi bi-pencil-square"></i> </a>
         </div>
         <h1 class="m-2 px-5"> Registros de Clientes </h1>
-        <form class="col-lg-auto mb-3 mt-4">
-            <input id="search" type="search" class="search border border-dark " placeholder="Search..." aria-label="Search">
+        <form action="/clienteBusca/search" method="get" class="col-lg-auto mb-3 mt-4" >
+            <input 
+                id="search" 
+                type="search" 
+                name="query" 
+                class="search border border-dark" 
+                placeholder="Digite CPF ou Nome..." 
+                aria-label="Search"
+            >
         </form>
     </div>
 
@@ -60,7 +67,7 @@
                                 class="container m-4 p-3 bg-transparent w-75" value="<%= clienteAtual.clienteEnde %>"
                                 <%=editar ? '' : 'readonly' %> >
                             <input placeholder="Telefone" name="clienteTel"
-                                class="container p-3 m-4 bg-transparent w-75" value="<%= clienteAtual.clienteTel %>"
+                                class="container p-3 m-4 bg-transparent w-75 mb-5" value="<%= clienteAtual.clienteTel %>"
                                 <%=editar ? '' : 'readonly' %> >
                 </div>
 
@@ -73,12 +80,13 @@
                         value="<%=  clienteAtual.clienteDataNasc %>"
                         <%=editar ? '' : 'readonly' %> >
                 </div>
-                <div class="d-flex justify-content-center m-5">
-                    <a href="/clienteBusca" class="rounded-pill btn btn-outline-dark me-5 mx-1  w-25"> Cancelar </a>
-                    <button class="rounded-pill btn btn-outline-dark ms-5 mx-5 w-25" type="submit">
-                        <%= editar ? 'Atualizar' : 'Salvar' %>
-                    </button>
-                </div>
+                <% if (editar) { %>
+                    <div class="d-flex justify-content-center my-5">
+                      <a href="/odsBusca" class="rounded-pill btn btn-outline-dark me-5 w-25"> Cancelar  </a>
+                      <button class="rounded-pill btn btn-outline-dark ms-5 w-25" type="submit"> Atualizar </button>
+                    </div>
+                    <% } %>
+                  
             </div>
         </div>
 
