@@ -3,25 +3,41 @@ const controller = {};
 controller.save = (req, res) => {
     const data = req.body;
     req.getConnection((err, conn) => {
-        if (err) return res.status(500).json({error: "Erro ao conectar ao banco de dados"});
-            conn.query('INSERT INTO ordem_de_servico set ?', [data], (err, rows) => {
-                if (err) return res.status(500).json({error: "Erro ao salvar nova oOrdem De Serviço"});
-                res.redirect('/ods');
-            });
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+        conn.query('INSERT INTO ordem_de_servico SET ?', [data], (err, rows) => {
+            if (err) return res.status(500).json({ error: "Erro ao salvar nova Ordem De Serviço" }); // Fixed typo here
+            res.redirect('/ods');
+        });
     });
 };
 
 
 controller.list = (req, res) => {
-    const odsIndex = parseInt(req.query.funcionarioIndex) || 0;
+    const odsIndex = parseInt(req.query.odsIndex) || 0;
     req.getConnection((err, conn) => {
-        if(err) return res.status(500).json({error: "Erro ao conectar ao banco de dados"});
-            conn.query('SELECT * FROM ordem_de_servico', (err, ods) => {
-                if (err) return res.status(500).json(({error: "Erro ao encontrar ordem_de_serviço"}));
-                res.render('odsBusca', {
-                    data: ods
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+        conn.query('SELECT * FROM ordem_de_servico', (err, ods) => {
+            if (err) return res.status(500).json({ error: "Erro ao encontrar ordem_de_serviço" });
+            const ODS = ods[odsIndex] || ods[0];
+            conn.query('SELECT funcMatricula, funcNome FROM funcionarios', (err, funcionarios) => {
+                if (err) return res.status(500).json({ error: "Erro ao buscar funcionários" });
+                conn.query('SELECT clienteCPF, clienteNome FROM clientes', (err, clientes) => {
+                    if (err) return res.status(500).json({ error: "Erro ao buscar clientes" });
+                    conn.query('SELECT veicPlaca, veicModelo FROM veiculos', (err, veiculos) => {
+                        if (err) return res.status(500).json({ error: "Erro ao buscar veículos" });
+                        res.render('odsBusca', {
+                            odsAtual: ODS,
+                            odsIndex: odsIndex,
+                            totalOds: ods.length,
+                            editar: false,
+                            funcionarios,
+                            clientes,
+                            veiculos,
+                        });
+                    });
                 });
             });
+        });
     });
 };
 
@@ -73,18 +89,34 @@ controller.edit = (req, res) => {
     const { OsNum } = req.params;
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
-        conn.query('SELECT * FROM ordem_de_servico WHERE OsNum = ?', [OsNum], (err, funcionario) => {
-            if (err) return res.status(500).json({ error: "Erro ao encontrar ao consultar matrícula do funcionario" });
-            res.render('funcBusca', {
-                odsAtual: ods[0],
-                odsIndex: req.query.odsIndex || 0,
-                totalOds: 1,
-                editar: true
+        conn.query('SELECT * FROM ordem_de_servico WHERE OsNum = ?', [OsNum], (err, ods) => {
+            if (err) return res.status(500).json({ error: "Erro ao consultar ordem de serviço" });
+
+            conn.query('SELECT funcMatricula, funcNome FROM funcionarios', (err, funcionarios) => {
+                if (err) return res.status(500).json({ error: "Erro ao buscar funcionários" });
+
+                conn.query('SELECT clienteCPF, clienteNome FROM clientes', (err, clientes) => {
+                    if (err) return res.status(500).json({ error: "Erro ao buscar clientes" });
+
+                    conn.query('SELECT veicPlaca, veicModelo FROM veiculos', (err, veiculos) => {
+                        if (err) return res.status(500).json({ error: "Erro ao buscar veículos" });
+
+                        res.render('odsBusca', {
+                            odsAtual: ods[0],
+                            odsIndex: req.query.odsIndex || 0,
+                            totalOds: 1,
+                            editar: true,
+                            funcionarios,
+                            clientes,
+                            veiculos,
+                        });
+                    });
+                });
             });
         });
+
     });
 };
-
 controller.delete = (req, res) => {
     const { OsNum } = req.params;
     req.getConnection((err, conn) => {
@@ -98,17 +130,40 @@ controller.delete = (req, res) => {
 
 
 controller.update = (req, res) => {
-    const { fOsNum } = req.params;
+    const { OsNum } = req.params;
     const novaODS = req.body;
     const odsIndex = req.body.odsIndex || 0; // pega o odsIndex enviado pelo formulário
     req.getConnection((err, conn) => {
         if (err) return res.status(500).json({ error: "Erro ao concetar ao banco de dados" });
-        conn.query('UPDATE ordem_de_servico set ? WHERE funcMatricula = ?', [novaODS, odsIndex], (err, funcionario) => {
+        conn.query('UPDATE ordem_de_servico set ? WHERE OsNum = ?', [novaODS, OsNum], (err, ods) => {
             if (err) return res.status(500).json({ error: "Erro ao atualizar funcionário" });
-            res.redirect(`/odsBusca?odsIndex=${odsIndex}`); // redirecione para o funcionario atualizado
+            res.redirect(`/odsBusca?odsIndex=${odsIndex}`); // redirecione para a ods atualizado
         });
     });
 };
+
+controller.getOdsData = (req, res) => {
+    req.getConnection((err, conn) => {
+        if (err) return res.status(500).json({ error: "Erro ao conectar ao banco de dados" });
+
+        // consulta os dados de funcionários e clientes
+        conn.query('SELECT funcMatricula, funcNome FROM funcionarios', (err, funcionarios) => {
+            if (err) return res.status(500).json({ error: "Erro ao buscar funcionários" });
+
+            conn.query('SELECT clienteCPF, clienteNome FROM clientes', (err, clientes) => {
+                if (err) return res.status(500).json({ error: "Erro ao buscar clientes" });
+
+                conn.query('SELECT veicPlaca, veicModelo FROM veiculos', (err, veiculos) => {
+                    if (err) return res.status(500).json({ error: "Erro ao buscar clientes" });
+
+                    // Renderiza o ods.ejs com os dois conjuntos de dados
+                    res.render('ods', { funcionarios, clientes, veiculos });
+                });
+            });
+        });
+    });
+};
+module.exports = controller;
 
 
 

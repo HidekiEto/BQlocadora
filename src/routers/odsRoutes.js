@@ -6,8 +6,8 @@ const odsController = require('../controllers/odsController');
 
 router.get('/ods', odsController.getOdsData);
 
-
 router.post('/ods/save', odsController.save);
+
 
 router.get('/odsBusca', odsController.list);
 
