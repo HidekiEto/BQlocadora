@@ -1,142 +1,52 @@
-/*Redefine as configurações de margin e padding*/
-* { 
-    margin: 0%;
-    padding: 0%;
-    box-sizing: border-box;
+body{
+    background-image: url('../assets/img/carro.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: initial;
 }
 
-/*Importa a fonte krona one*/
-@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+.col-md-6:first-child {
+    background: rgba(139, 139, 139, 0.5);
+    border-top-left-radius: 3rem;
+    border-bottom-left-radius: 3rem;
 
-/*Define a cor do body*/
-body {
-    background-color: #FD9438;
 }
 
-/*Classe para o cabeçalho*/
-.cabecalho {
-    display: grid;
-    grid-template-columns: 7% 93%;
-    background-color: #ffffff;
-    align-items: center;
-    height: 140px;
-}
+.col-md-6:last-child {
+    background: rgba(0,0,0,0.5);
+    border-bottom-right-radius: 3rem;
+    border-top-right-radius: 3rem;
 
-/*Classe para o titulo*/
-.titulo {
-    justify-self: end;
-    padding-right: 2%;
+   
 }
-
-/*Classe para o meio da página*/
-.meio {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-}
-
-/*Classe para a div login*/
-.divlogin {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 5%;
-    margin-left: 5%;
-    background-color: #ffffff;
-    height: 80%;
-    width: 100%;
-    padding-bottom: 5%;
-}
-
-/*Estilização dos labels*/
-label {
-    margin-left: 5%;
-    font-family: "Krona One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: #FF7700;
-    font-size: 30px;
-}
-
-/*Classe para o h1login*/
-.h1login {
-    padding-top: 4%;
-    color: #FF7700;
-    font-family: "Krona One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 55px;
-    text-align: center;
-    padding-bottom: 5%;
-}
-
-/*Estilização dos inputs*/
 input {
-    margin-left: 5%;
-    background-color: #FF9B44;
-    border-style: none;
-    height: 70px;
-    width: 90%;
-    margin-bottom: 7%;
-    font-family: "Krona One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    padding-left: 2%;
-    padding-right: 2%;
-    margin-top: 2%;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7); 
+    outline: none; 
+
 }
 
-/*Estilização dos botões*/
-button {
-    justify-self: center;
-    height: 80px;
-    width: 225px;
-    border-style: none;
-    border-radius: 20px;
-    background-color: #FF7700;
-    font-family: "Krona One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: #ffffff;
-    font-size: 30px;
+input::placeholder{
+    color: white;
 }
-
-/*Classe para a fonte*/
-.fonte {
-    font-family: "Krona One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 25px;
+hr{
+        border: none;
+        margin: 10px 0; /* Espaçamento acima e abaixo */
 }
-
-/*Classe para a imagem da logo*/
-.logo {
-    height: 60px;
-    width: 200px;
-    margin-left: 20%;
+a.icon{
+    text-decoration: none;
+    color: white;
 }
-
-/*Classe para a div dos botões*/
-.divbotao {
-    justify-content: center;
-    padding-top: 3%;
-    display: grid;
-    grid-template-columns: 50% 50%;
+a.icon:hover{
+    color: black;
 }
-
-/*Classe para a div da imagem de alugue já*/
-.divalugue {
+.icon-group{
     display: flex;
-    justify-content: center;
+    gap: 4rem;
     align-items: center;
-}
 
-/*Classe para a imagem de alugue já*/
-.alugue {
-    width: 80%;
-    height: 60%;
-    align-self: center;
-    margin-left: 3%;
 }
 
 
+
+/* background: rgba(0,0,0,0.5) !important;
